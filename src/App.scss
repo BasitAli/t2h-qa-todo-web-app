@@ -1,0 +1,23 @@
+body,
+.main {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: sans-serif;
+  flex-direction: column;
+}
+
+div {
+  user-select: none;
+  display: flex;
+  flex-shrink: 0;
+}
+
+input[type="text"] {
+  border: none;
+}
+
+*:focus {
+  outline: none;
+}

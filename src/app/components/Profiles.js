@@ -40,7 +40,7 @@ class Profiles extends Component {
     const { name, about, location } = this.props.profile;
 
     return (
-      <View style={{ flexDirection: "column", padding: 10 }}>
+      <View style={{ flexDirection: "column", padding: 20 }}>
         <ProfileItem
           label="Name"
           value={name}
@@ -60,7 +60,7 @@ class Profiles extends Component {
         <Button
           title="Clear all items"
           onPress={() => this.onDelete()}
-          contentStyle={{ width: "100%" }}
+          contentStyle={{ flex: 1 }}
         />
 
         <DeleteConfirmationModal

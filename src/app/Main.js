@@ -20,7 +20,7 @@ class Main extends Component {
 
   render() {
     return (
-      <View className="main" style={{ flex: 1, paddingTop: 20 }}>
+      <View className="main" style={{ flex: 1 }}>
         <TabBar
           items={["To Do", "Profiles"]}
           activeTab={this.props.activeTab}

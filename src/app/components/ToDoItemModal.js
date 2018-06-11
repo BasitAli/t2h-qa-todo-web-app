@@ -45,7 +45,8 @@ export default class ToDoItemModal extends Component {
           style={{ width: "100%" }}
           onChangeText={text => this.setState({ text })}
         />
-        <View>
+        <View style={{ width: "100%", height: 1, backgroundColor: "black" }} />
+        <View style={{ flexDirection: "row" }}>
           <Button
             title={action}
             contentStyle={{ width: 100, margin: 10 }}

@@ -1,15 +1,28 @@
 import { persistStore, persistReducer } from "redux-persist";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 
-import reducers from "./reducers";
+import { tabReducer, profileReducer, todosReducer } from "./reducers";
 
-const persistConfig = {
+const rootPersistConfig = {
   key: "root",
-  storage
+  storage: storage,
+  blacklist: ["profile"]
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const profilePersistConfig = {
+  key: "profile",
+  storage: storage,
+  blacklist: ["location"] // Intentional bug
+};
+
+const rootReducer = combineReducers({
+  profile: persistReducer(profilePersistConfig, profileReducer),
+  activeTab: tabReducer,
+  todos: todosReducer
+});
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export default () => {
   let store = createStore(persistedReducer);

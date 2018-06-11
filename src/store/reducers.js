@@ -3,59 +3,70 @@ import { Actions } from "./actions";
 
 setAutoFreeze(false);
 
-const defaultState = {
-  activeTab: 0,
-  todos: [
-    { id: 1, title: "Create a test plan for the mobile and web applications." },
-    { id: 2, title: "Perform manual test execution on both platforms" },
-    {
-      id: 3,
-      title:
-        "Document any software issues with clear and detailed steps to duplicate the defect",
-      checked: true
-    }
-  ],
-  profile: {
-    name: "Dummy",
-    about: "This is a dummy account",
-    location: "I live in your browser"
+const defaultActiveTab = 0;
+
+export const tabReducer = (state = defaultActiveTab, action) => {
+  if (action.type === Actions.SWITCH_TAB) {
+    return action.index;
+  } else {
+    return state;
   }
 };
 
-const reducer = produce((draft, action) => {
+const defaultTodos = [
+  { id: 1, title: "Create a test plan for the mobile and web applications." },
+  { id: 2, title: "Perform manual test execution on both platforms" },
+  {
+    id: 3,
+    title:
+      "Document any software issues with clear and detailed steps to duplicate the defect",
+    checked: true
+  }
+];
+
+export const todosReducer = produce((draft, action) => {
   switch (action.type) {
-    case Actions.SWITCH_TAB:
-      draft.activeTab = action.index;
-      return;
     case Actions.ADD_TODO:
-      draft.todos.push({ ...action.item, id: Date.now() });
+      draft.push({ ...action.item, id: Date.now() });
       return;
     case Actions.UPDATE_TODO:
       {
-        const index = draft.todos.findIndex(item => item.id === action.item.id);
+        const index = draft.findIndex(item => item.id === action.item.id);
         if (index >= 0) {
-          Object.assign(draft.todos[index], action.item);
+          Object.assign(draft[index], action.item);
         }
       }
       return;
     case Actions.REMOVE_TODO:
       {
-        const index = draft.todos.findIndex(item => item.id === action.item.id);
+        const index = draft.findIndex(item => item.id === action.item.id);
         if (index >= 0) {
-          draft.todos.splice(index, 1);
+          draft.splice(index, 1);
         }
       }
       return;
+    case Actions.CLEAR_ALL_ITEMS:
+      return [];
+    default:
+      return;
+  }
+}, defaultTodos);
+
+const defaultProfile = {
+  name: "Dummy",
+  about: "This is a dummy account",
+  location: "I live in your browser"
+};
+
+export const profileReducer = produce((draft, action) => {
+  switch (action.type) {
     case Actions.UPDATE_PROFILE:
-      Object.assign(draft.profile, action.profile);
+      Object.assign(draft, action.profile);
       return;
     case Actions.CLEAR_ALL_ITEMS:
-      draft.todos = [];
-      draft.profile = defaultState.profile;
+      Object.assign(draft, defaultProfile);
       return;
     default:
       return;
   }
-}, defaultState);
-
-export default reducer;
+}, defaultProfile);

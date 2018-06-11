@@ -24,7 +24,12 @@ const ToDoItem = ({ item, onCheck, onEdit, onDelete }) => {
     >
       <CheckButton onPress={() => onCheck(!checked)} checked={checked} />
       <TouchableWithoutFeedback
-        style={{ flex: 1, alignSelf: "stretch", alignItems: "center" }}
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          alignSelf: "stretch",
+          alignItems: "center"
+        }}
         onPress={onEdit}
       >
         <Text style={{ marginLeft: 10 }}>{title}</Text>

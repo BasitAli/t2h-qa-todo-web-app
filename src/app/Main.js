@@ -4,6 +4,7 @@ import TabBar from "./components/TabBar";
 import ToDoListContainer from "./containers/ToDoListContainer";
 import ProfilesContainer from "./containers/ProfilesContainer";
 import { switchTab } from "../store/actions";
+import { View } from "../react-native-wrapper";
 
 class Main extends Component {
   renderContent() {
@@ -19,14 +20,14 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="main">
+      <View className="main" style={{ flex: 1, paddingTop: 20 }}>
         <TabBar
           items={["To Do", "Profiles"]}
           activeTab={this.props.activeTab}
           onTabChange={index => this.props.switchTab(index)}
         />
         {this.renderContent()}
-      </div>
+      </View>
     );
   }
 }

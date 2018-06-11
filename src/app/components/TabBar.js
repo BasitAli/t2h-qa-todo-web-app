@@ -6,7 +6,9 @@ import {
 } from "../../react-native-wrapper";
 
 const styles = {
-  tabBar: {},
+  tabBar: {
+    flexDirection: "row"
+  },
   tabBarItem: {
     flex: 1,
     padding: 20,
